@@ -7,3 +7,4 @@ Thumbs.db
 *.tmp
 .env
 .env.*
+!.env.example
