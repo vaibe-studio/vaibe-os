@@ -1,0 +1,9 @@
+---
+description: Использование Python и виртуального окружения .venv
+globs: []
+alwaysApply: true
+---
+
+> Source of truth: `.ai/rules/python-venv.md`
+
+Read and follow `.ai/rules/python-venv.md` for Python venv usage rules (paths for Linux/macOS/Windows, creating .venv).

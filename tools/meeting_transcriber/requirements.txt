@@ -1,0 +1,12 @@
+# Base (needed for both backends)
+python-dotenv
+
+# AssemblyAI backend only
+assemblyai>=0.30.0
+
+# Local backend only (Whisper + pyannote.audio)
+# Optional: install only if using --backend local
+openai-whisper
+pyannote.audio
+torch
+torchaudio

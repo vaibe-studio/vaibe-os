@@ -1,15 +1,41 @@
-# Временные импорты (инстанс может раскомментировать)
-# /Инбокс/
-
 # Python
+.venv/
+venv/
 __pycache__/
 *.pyc
 *.pyo
+*.egg-info/
+dist/
+build/
 
-# Служебные и личные
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+
+# OS
 .DS_Store
 Thumbs.db
-*.tmp
-.env
-.env.*
-!.env.example
+
+# Media (large files)
+*.mp4
+*.mp3
+*.webm
+*.wav
+*.m4a
+*.avi
+
+# Inbox contents (user files)
+/Инбокс/*/
+!/Инбокс/.gitkeep
+!/Инбокс/README.md
+
+# Private projects (pattern: *Личное* in name)
+/Проекты/*Личное*/
+
+# Tool caches
+**/.cache/

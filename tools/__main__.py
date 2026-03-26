@@ -69,21 +69,25 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("args", nargs=argparse.REMAINDER, help="Аргументы для tools.pdf_to_markdown")
     p.set_defaults(_handler="module", _module="tools.pdf_to_markdown")
 
-    p = sub.add_parser("yt-create-issues-from-meeting", help="Создать задачи YouTrack из meeting_tasks.md")
-    p.add_argument("args", nargs=argparse.REMAINDER, help="Аргументы для tools.yt_create_issues_from_meeting")
-    p.set_defaults(_handler="module", _module="tools.yt_create_issues_from_meeting")
-
-    p = sub.add_parser("cursor-stats", help="Статистика использования Cursor (токены/стоимость)")
-    p.add_argument("args", nargs=argparse.REMAINDER, help="Аргументы для tools.cursor_stats")
-    p.set_defaults(_handler="module", _module="tools.cursor_stats")
-
-    p = sub.add_parser("epk-select-leads", help="Выбрать лидов из CSV спикеров (EPK outreach)")
-    p.add_argument("args", nargs=argparse.REMAINDER, help="Аргументы для tools/epk_outreach/select_leads.py")
-    p.set_defaults(_handler="script", _script="tools/epk_outreach/select_leads.py")
-
     p = sub.add_parser("process-deferred-kb-source", help="Обработать отложенный KB-источник (конвейер)")
     p.add_argument("args", nargs=argparse.REMAINDER, help="Аргументы для tools/process_deferred_kb_source.py")
     p.set_defaults(_handler="script", _script="tools/process_deferred_kb_source.py")
+
+    p = sub.add_parser("meeting-transcriber", help="Транскрибация встреч с диаризацией (AssemblyAI или local)")
+    p.add_argument("args", nargs=argparse.REMAINDER, help="Аргументы для tools.meeting_transcriber")
+    p.set_defaults(_handler="module", _module="tools.meeting_transcriber")
+
+    p = sub.add_parser("yt-context-pull", help="Выгрузка AS IS контекста задач из YouTrack")
+    p.add_argument("args", nargs=argparse.REMAINDER, help="Аргументы для tools.yt_context_pull")
+    p.set_defaults(_handler="module", _module="tools.yt_context_pull")
+
+    p = sub.add_parser("vault-lint", help="Проверка инвариантов vAIbe-OS (GUARDS.md)")
+    p.add_argument("args", nargs=argparse.REMAINDER, help="Аргументы для tools.vault_lint")
+    p.set_defaults(_handler="module", _module="tools.vault_lint")
+
+    p = sub.add_parser("vault-index", help="Генерация .ai/VAULT-INDEX.md — сводка vault")
+    p.add_argument("args", nargs=argparse.REMAINDER, help="Аргументы для tools.vault_index")
+    p.set_defaults(_handler="module", _module="tools.vault_index")
 
     ns = ap.parse_args(argv)
 

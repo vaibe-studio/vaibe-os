@@ -1,0 +1,2 @@
+# vault-lint uses only Python stdlib (pathlib, re, sys, json)
+# No external dependencies required

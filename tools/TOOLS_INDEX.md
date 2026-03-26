@@ -1,6 +1,6 @@
 # Tools index (vAIbe-os)
 
-Короткий каталог утилит в `tools/` — чтобы не “изобретать заново” скрипты при похожих задачах.
+Короткий каталог утилит в `tools/` — чтобы не "изобретать заново" скрипты при похожих задачах.
 
 ## Общие правила использования
 
@@ -57,68 +57,94 @@ python -m tools pdf-to-markdown input.pdf -o output.md
 
 ---
 
-## YouTrack: создание задач из meeting_tasks.md
+## YouTrack: выгрузка AS IS контекста задач
 
-- **Путь**: `tools/yt_create_issues_from_meeting/`
-- **Назначение**: создать задачи в YouTrack из `meeting_tasks.md` выбранной встречи.
+- **Путь**: `tools/yt_context_pull/`
+- **Назначение**: загрузка текущего состояния задач из YouTrack (статусы, исполнители, комментарии) с формированием план-подобного отчёта и сравнением с предыдущей выгрузкой.
 - **Команды**:
 
 ```bash
-python -m tools.yt_create_issues_from_meeting 3
-python -m tools.yt_create_issues_from_meeting 3 --dry-run
-python -m tools.yt_create_issues_from_meeting 3 --project UCP
+python -m tools.yt_context_pull
+python -m tools.yt_context_pull --project PROJECT
+python -m tools.yt_context_pull --profile MY_PROJECT
+python -m tools.yt_context_pull --profile MY_PROJECT --dry-run
+python -m tools.yt_context_pull --output-dir "Проекты/МойПроект/YouTrack"
 ```
 
 Через единый CLI:
 
 ```bash
-python -m tools yt-create-issues-from-meeting 3 --dry-run
+python -m tools yt-context-pull
+python -m tools yt-context-pull --project PROJECT --dry-run
 ```
 
 ---
 
-## EPK outreach: выбрать лидов из CSV спикеров
+## Meeting Transcriber: транскрибация встреч с диаризацией спикеров
 
-- **Путь**: `tools/epk_outreach/select_leads.py`
-- **Назначение**: подобрать сбалансированный список лидов для аутрича из CSV (с авто-детектом CSV в `Инбокс/`).
+- **Путь**: `tools/meeting_transcriber/`
+- **Назначение**: транскрибировать аудио/видео встреч с разметкой спикеров. Бэкенды: **AssemblyAI** (API) или **local** (Whisper + pyannote.audio).
 - **Команды**:
 
 ```bash
-python tools/epk_outreach/select_leads.py --csv-auto --per-segment 15
-python tools/epk_outreach/select_leads.py --csv "C:\path\to\file.csv" --per-segment 15
+python -m tools.meeting_transcriber meeting.mp4
+python -m tools.meeting_transcriber meeting.mp4 --backend local --lang ru
+python -m tools.meeting_transcriber meeting.mp4 -o путь/transcript.md
 ```
 
 Через единый CLI:
 
 ```bash
-python -m tools epk-select-leads --csv-auto --per-segment 15
+python -m tools meeting-transcriber meeting.mp4 --backend assemblyai
 ```
+
+Используется командой `/meeting-processing`. См. `tools/meeting_transcriber/README.md`.
 
 ---
 
-## Cursor usage stats: статистика токенов за день
+## Vault Lint: проверка инвариантов (GUARDS.md)
 
-- **Путь**: `tools/cursor_stats/`
-- **Назначение**: получить статистику использования Cursor за день.
+- **Путь**: `tools/vault_lint/`
+- **Назначение**: автоматическая проверка инвариантов vAIbe-OS, определённых в `.ai/GUARDS.md` (G1–G7): проекты с README.md и Видимостью, задачи с секцией Статус, русский язык файлов, нумерация, версионирование results/, frontmatter skills, broken links.
 - **Команды**:
 
 ```bash
-python -m tools.cursor_stats
-python -m tools.cursor_stats --date 2026-01-27
+python -m tools.vault_lint
+python -m tools.vault_lint --guard G1 G2
+python -m tools.vault_lint --json
 ```
 
 Через единый CLI:
 
 ```bash
-python -m tools cursor-stats --date 2026-01-27
+python -m tools vault-lint
+python -m tools vault-lint --guard G1 G4
 ```
 
 ---
 
-## Обработка “отложенного” источника в базу знаний
+## Vault Index: сводка состояния vault
+
+- **Путь**: `tools/vault_index/`
+- **Назначение**: автоматическая генерация `.ai/VAULT-INDEX.md` — сводка проектов, задач, skills, bots, rules, knowledge.
+- **Команды**:
+
+```bash
+python -m tools.vault_index
+```
+
+Через единый CLI:
+
+```bash
+python -m tools vault-index
+```
+
+---
+
+## Обработка "отложенного" источника в базу знаний
 
 - **Путь**: `tools/process_deferred_kb_source.py`
-- **Назначение**: пример “конвейера” обработки файла из `Инбокс/Отложено/` → чистый исходник + конспект в `База знаний/`, затем удаление исходника из очереди.
+- **Назначение**: пример "конвейера" обработки файла из `Инбокс/Отложено/` → чистый исходник + конспект в `База знаний/`, затем удаление исходника из очереди.
 - **Команда**:
 
 ```bash
@@ -130,4 +156,3 @@ python tools/process_deferred_kb_source.py
 ```bash
 python -m tools process-deferred-kb-source
 ```
-
