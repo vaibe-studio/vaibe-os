@@ -123,7 +123,23 @@ vAIbe-OS is free for personal and team use — forever. No strings attached.
 
 If you use it commercially and it helps your business generate revenue, we'd be grateful for a voluntary contribution. We suggest 1–5% of the net profit vAIbe-OS helped create. These funds go directly toward development, community building, and keeping the project alive.
 
-<!-- [☕ Support via GitHub Sponsors](link) | [💙 Open Collective](link) -->
+| Method | Link | Best for |
+|--------|------|----------|
+| 🇷🇺 Boosty | [boosty.to/vaibe_os](https://boosty.to/vaibe_os/donate) | Russian cards, SBP, international cards (USD/EUR), PayPal |
+| ₿ Crypto | See below | Works worldwide, no restrictions |
+
+<details>
+<summary>💰 Crypto wallets</summary>
+
+| Coin | Network | Address |
+|------|---------|---------|
+| USDT | TRC-20 | `29YoJ7rdjVPkkpuHFbKj3picPQTW1N2vawU28NHgd7rF` |
+| BTC | Bitcoin | `bc1qj5s2tmtp4nvnr3vzpgjsd5m0568f2arfc8vucu` |
+| ETH | Ethereum | `0x98804f5e2E9BfEEec04f745c5A6C81f3a8E4FD12` |
+| SOL | Solana | `29YoJ7rdjVPkkpuHFbKj3picPQTW1N2vawU28NHgd7rF` |
+| TON | TON | `UQDCLj4yhDXX0RYyvcRJmsvDPWZvib75UxUA0FUWr0LS8e2A` |
+
+</details>
 
 ## 🤝 Contributing
 
