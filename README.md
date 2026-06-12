@@ -28,7 +28,7 @@ Think of it as **Obsidian for AI agents**: everything is plain Markdown files in
 | 🗂️ **Structure** | Projects, tasks, meetings, knowledge base — your AI knows where everything is from day one |
 | 🧠 **Memory** | Everything lives in files. Context doesn't disappear when you close the chat |
 | 🌱 **Evolution** | The system improves itself via `/evolve`, adapting to how *you* work |
-| 🎯 **Skills** | 13 core skills for task management, planning, reporting, and more — ready to use |
+| 🎯 **Skills** | 14 core skills for task management, planning, reporting, and more — ready to use |
 | 📚 **Knowledge base** | 15+ curated reference materials — project management, strategy frameworks, sales methodologies, startup finance, and more. Your AI has domain expertise from the start |
 
 ## 🚀 Quickstart
@@ -66,7 +66,7 @@ vAIbe-OS/
 ├── 📋 AGENTS.md              → AI reads this first (judgment boundaries)
 ├── 🧠 .ai/                   → The brain: skills, knowledge, philosophy
 │   ├── router.md             → Routes your request to the right skill
-│   ├── skills/core/          → 13 core skills (task mgmt, planning, evolve...)
+│   ├── skills/core/          → 14 core skills (task mgmt, planning, evolve...)
 │   ├── skills/domain/        → 12 domain skills (presentations, research...)
 │   ├── knowledge/            → 15+ reference materials (strategy, PM, sales...)
 │   ├── ONTOLOGY.md           → Why the system exists (philosophical foundation)
@@ -116,6 +116,12 @@ Three principles that make it different:
 | **Any other** | `AGENTS.md` + `.ai/` | 🟡 Basic support |
 
 > 💎 **Tip on model choice.** vAIbe-OS works with any LLM, but we recommend leading models (Claude Opus/Sonnet, GPT-4o, Gemini Pro) — skill quality, planning, and `/evolve` are noticeably better on top-tier models. If you have the choice, go with the best.
+
+## 💬 Community
+
+Join the conversation, share your skills, ask questions, and shape where vAIbe-OS goes next:
+
+- 📨 **Telegram** — [t.me/vAIbe_OS](https://t.me/vAIbe_OS)
 
 ## 🌱 Supporting vAIbe-OS
 
