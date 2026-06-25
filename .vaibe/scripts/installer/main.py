@@ -3,16 +3,17 @@
 vAIbe-OS Installer — TUI for initial setup.
 
 Usage:
-    python tools/installer/install.py
+    uv run --project .vaibe/scripts/installer .vaibe/scripts/installer/main.py
 
-Requires: Python 3.8+ (stdlib only, no external dependencies)
+Stdlib only — no external dependencies (uv just resolves the empty dependency set).
 """
 
 import os
 import sys
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+# .vaibe/scripts/installer/main.py → repo root is four levels up.
+REPO_ROOT = Path(__file__).resolve().parents[3]
 
 AGENTS = [
     ("cursor", "Cursor"),

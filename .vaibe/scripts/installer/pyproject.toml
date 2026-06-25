@@ -1,0 +1,6 @@
+[project]
+name = "installer"
+version = "0.1.0"
+description = "vAIbe-OS first-run TUI installer — scaffolds the vault and verifies the agent's native layer"
+requires-python = ">=3.11"
+dependencies = []

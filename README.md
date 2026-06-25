@@ -38,8 +38,8 @@ Think of it as **Obsidian for AI agents**: everything is plain Markdown files in
 git clone https://github.com/vaibe-studio/vaibe-os.git
 cd vaibe-os
 
-# 2. Run the installer
-python tools/installer/install.py
+# 2. Run the installer (needs uv — https://docs.astral.sh/uv/)
+uv run --project .vaibe/scripts/installer .vaibe/scripts/installer/main.py
 
 # 3. Open in your AI IDE and introduce yourself!
 #    Just say: "Hi! I'm [your name], I work on [what you do].

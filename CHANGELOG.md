@@ -47,8 +47,8 @@ keeps the generated layer in sync with the canon.
 
 ### Removed
 
-- Legacy `.ai/` and top-level `tools/` trees — canon is now `.vaibe/` only
-  (the `tools/installer/` TUI is kept).
+- Legacy `.ai/` and top-level `tools/` trees — canon is now `.vaibe/` only.
+  The first-run installer moved to `.vaibe/scripts/installer/` as a `uv` project.
 - Standalone command `.md` files — superseded by skills.
 
 ### Fixed

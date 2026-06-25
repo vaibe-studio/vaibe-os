@@ -80,7 +80,7 @@ vAIbe-OS is built on specific principles ([Manifesto](.vaibe/rules/manifesto.md)
 
 ### File naming
 
-- Folders and files in the vault use **Russian names** (except canon `.vaibe/`, `tools/`, `repositories/`, and system `.md` files, which stay latin)
+- Folders and files in the vault use **Russian names** (except canon `.vaibe/`, `repositories/`, and system `.md` files, which stay latin)
 - Task numbers use leading zeros: `001`, `002`, `010`
 - No case-only renames (contributors span case-insensitive Windows and case-sensitive Linux)
 - See [`.vaibe/rules/structure.md`](.vaibe/rules/structure.md) for the full specification

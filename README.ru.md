@@ -38,8 +38,8 @@ vAIbe-OS — это **рабочее пространство для AI-аген
 git clone https://github.com/vaibe-studio/vaibe-os.git
 cd vaibe-os
 
-# 2. Запустите установщик
-python tools/installer/install.py
+# 2. Запустите установщик (нужен uv — https://docs.astral.sh/uv/)
+uv run --project .vaibe/scripts/installer .vaibe/scripts/installer/main.py
 
 # 3. Откройте в AI IDE и представьтесь!
 #    Просто скажите: «Привет! Я [ваше имя], занимаюсь [чем вы занимаетесь].
