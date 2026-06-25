@@ -1,0 +1,7 @@
+# GENERATED — DO NOT EDIT. Source: .vaibe/agents/architect.md
+name = "architect"
+description = "Architecture advisor subagent for vAIbe-OS. Use to analyze trade-offs and propose additive structural changes; presents alternatives, never changes without explicit approval."
+developer_instructions = """
+Follow the instructions from the canonical file as if they were written here; open it at
+the given path and execute: .vaibe/agents/architect.md
+"""

@@ -1,0 +1,25 @@
+name: doctor diagnose
+
+# Load-bearing anti-drift gate (batch S, task 071): canon ↔ native integrity.
+# A red run should block merge — enable branch protection requiring this check.
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: false  # repositories/ are submodules; not needed for canon checks
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: doctor diagnose (generated == canon + lint + guards)
+        run: uv run --project .vaibe/scripts/doctor .vaibe/scripts/doctor/main.py diagnose
+
+      - name: doctor regression test (treat reproduces phase-3, all types)
+        run: uv run --project .vaibe/scripts/doctor .vaibe/scripts/doctor/test_doctor.py

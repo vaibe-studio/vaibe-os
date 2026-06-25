@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand — Value Proposition</title>
+  <meta name="description" content="Description here">
+  <meta property="og:title" content="Brand — Value Proposition">
+  <meta property="og:description" content="Description here">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Default: Manrope + Inter. Replace with chosen pair from landing-page-patterns.md -->
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ── DESIGN TOKENS ── */
+    :root {
+      /* Colors — replace with chosen palette */
+      --bg: #ffffff;
+      --bg-elevated: #f8f8fa;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f5f5f8;
+      --surface: #f0f0f5;
+      --text: #1a1a2e;
+      --text-heading: #0d0d1a;
+      --text-muted: #6b6b80;
+      --border: rgba(0,0,0,0.08);
+      --border-accent: rgba(37,99,235,0.25);
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-soft: rgba(37,99,235,0.08);
+      --accent-glow: rgba(37,99,235,0.15);
+      --gradient-accent: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+      --gradient-hero: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(37,99,235,0.06) 0%, transparent 70%);
+
+      /* Typography — replace with chosen pair */
+      --font-heading: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+      /* Shape */
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-xs: 6px;
+      --max-w: 1120px;
+      --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-glow: 0 0 48px var(--accent-glow);
+    }
+
+    /* ── RESET ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+    h1, h2, h3 { font-family: var(--font-heading); }
+
+    /* ── LAYOUT ── */
+    .wrap {
+      width: min(var(--max-w), calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      padding: 0 24px;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-brand {
+      font-family: var(--font-heading);
+      font-weight: 800; font-size: 1.35rem; letter-spacing: -0.03em;
+      color: var(--text-heading);
+    }
+    .nav-brand span {
+      background: var(--gradient-accent);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links {
+      display: flex; align-items: center; gap: 28px;
+    }
+    .nav-links a {
+      font-size: 0.88rem; font-weight: 500; color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text-heading); }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 22px; border-radius: 999px; border: none;
+      font-family: var(--font-body); font-size: 0.9rem; font-weight: 700;
+      cursor: pointer; transition: all 0.2s; text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--gradient-accent); color: #ffffff;
+      box-shadow: 0 4px 24px var(--accent-glow);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 32px rgba(37,99,235,0.28);
+    }
+    .btn-ghost {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover {
+      border-color: rgba(0,0,0,0.2); color: var(--text-heading);
+    }
+    .nav-cta { display: flex; }
+    .burger {
+      display: none; background: none; border: none; cursor: pointer; padding: 6px;
+    }
+    .burger span {
+      display: block; width: 22px; height: 2px; background: var(--text);
+      margin: 5px 0; border-radius: 2px; transition: 0.3s;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      justify-content: center; text-align: center;
+      padding: 120px 24px 80px; position: relative;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--gradient-hero);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 780px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 999px;
+      background: var(--accent-soft); border: 1px solid var(--border-accent);
+      font-size: 0.82rem; font-weight: 600; color: var(--accent);
+      margin-bottom: 32px;
+    }
+    .hero-badge .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--accent-glow); }
+      50% { opacity: 0.6; box-shadow: 0 0 0 6px transparent; }
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 800;
+      line-height: 1.08; letter-spacing: -0.04em;
+      color: var(--text-heading); margin-bottom: 24px;
+    }
+    .hero h1 .accent {
+      background: var(--gradient-accent);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      font-size: clamp(1.05rem, 2vw, 1.15rem);
+      color: var(--text-muted); max-width: 580px;
+      margin: 0 auto 36px; line-height: 1.7;
+    }
+    .hero-actions {
+      display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+    }
+
+    /* ── SECTIONS ── */
+    .section { padding: 80px 0; }
+    .section-alt { background: var(--surface); }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.78rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--accent); margin-bottom: 16px;
+    }
+    .section-label::before {
+      content: ''; width: 20px; height: 2px;
+      background: var(--accent); border-radius: 2px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800;
+      color: var(--text-heading); line-height: 1.12;
+      letter-spacing: -0.03em; margin-bottom: 16px;
+    }
+    .section-desc {
+      font-size: 1.05rem; color: var(--text-muted);
+      max-width: 600px; line-height: 1.7;
+    }
+    .section-header { margin-bottom: 48px; }
+    .section-header.center { text-align: center; }
+    .section-header.center .section-desc { margin: 0 auto; }
+
+    /* ── CARD GRID ── */
+    .card-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+    }
+    .card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px;
+      transition: border-color 0.3s, transform 0.2s;
+    }
+    .card:hover { border-color: var(--border-accent); transform: translateY(-2px); }
+    .card-icon {
+      width: 44px; height: 44px; border-radius: var(--radius-xs);
+      background: var(--accent-soft);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px; font-size: 1.2rem;
+    }
+    .card h3 {
+      font-size: 1.1rem; font-weight: 700; color: var(--text-heading);
+      margin-bottom: 8px; line-height: 1.3;
+    }
+    .card p { font-size: 0.92rem; color: var(--text-muted); }
+
+    /* ── STEP GRID ── */
+    .step-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 20px; position: relative;
+    }
+    .step-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 36px 28px;
+      text-align: center; position: relative;
+      transition: border-color 0.3s, transform 0.2s;
+    }
+    .step-card:hover { border-color: var(--border-accent); transform: translateY(-3px); }
+    .step-num {
+      width: 52px; height: 52px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      font-family: var(--font-heading);
+      font-size: 1.1rem; font-weight: 800;
+      background: var(--accent-soft); color: var(--accent);
+      border: 2px solid var(--border-accent);
+    }
+    .step-card h3 {
+      font-size: 1.1rem; font-weight: 700; color: var(--text-heading);
+      margin-bottom: 10px;
+    }
+    .step-card p { font-size: 0.9rem; color: var(--text-muted); }
+
+    /* ── METRIC GRID ── */
+    .metric-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    }
+    .metric-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px 24px;
+      text-align: center;
+      transition: border-color 0.3s, transform 0.2s;
+    }
+    .metric-card:hover { border-color: var(--border-accent); transform: translateY(-2px); }
+    .metric-num {
+      font-family: var(--font-heading);
+      font-size: 2.2rem; font-weight: 900; letter-spacing: -0.04em;
+      background: var(--gradient-accent);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    .metric-card h4 { font-size: 0.92rem; font-weight: 600; color: var(--text-heading); margin-bottom: 6px; }
+    .metric-card p { font-size: 0.82rem; color: var(--text-muted); }
+
+    /* ── CTA SECTION ── */
+    .cta-section { padding: 80px 0; }
+    .cta-box {
+      max-width: 640px; margin: 0 auto; text-align: center;
+      padding: 56px 40px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius);
+      position: relative; overflow: hidden;
+    }
+    .cta-box::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 2px; background: var(--gradient-accent);
+    }
+    .cta-box h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800;
+      color: var(--text-heading); margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    .cta-box p {
+      font-size: 1rem; color: var(--text-muted);
+      margin-bottom: 28px; max-width: 460px; margin-left: auto; margin-right: auto;
+    }
+    .cta-box .btn { min-width: 200px; justify-content: center; }
+    .cta-contacts {
+      margin-top: 28px; padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem; color: var(--text-muted);
+    }
+    .cta-contacts a { color: var(--accent); }
+    .cta-contacts a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    .footer {
+      padding: 32px 0; border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.82rem; color: var(--text-muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .burger { display: block; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: absolute; top: 64px; left: 0; right: 0;
+        background: rgba(255,255,255,0.97); padding: 20px 24px;
+        border-bottom: 1px solid var(--border);
+        gap: 16px;
+      }
+      .card-grid { grid-template-columns: 1fr; }
+      .step-grid { grid-template-columns: 1fr; }
+      .metric-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .wrap { width: calc(100% - 32px); }
+      .hero { padding: 100px 16px 60px; min-height: auto; }
+      .hero h1 { font-size: 2rem; }
+      .hero-actions { flex-direction: column; align-items: center; }
+      .btn { width: 100%; justify-content: center; }
+      .metric-grid { grid-template-columns: 1fr; }
+      .section { padding: 56px 0; }
+      .cta-box { padding: 40px 24px; }
+      .nav-cta { display: none; }
+    }
+
+    /* ── ANALYTICS PLACEHOLDER ──
+    Add GTM or Yandex Metrica snippet here:
+    <script async src="https://www.googletagmanager.com/gtag/js?id=..."></script>
+    -->
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" role="navigation" aria-label="Main">
+    <div class="nav-inner">
+      <a class="nav-brand" href="#top">Brand<span>Name</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="#problem">Проблема</a>
+        <a href="#how">Как работает</a>
+        <a href="#services">Услуги</a>
+        <a href="#results">Результат</a>
+      </div>
+      <div class="nav-right">
+        <div class="nav-cta">
+          <a class="btn btn-primary" href="#cta">CTA Button</a>
+        </div>
+      </div>
+      <button class="burger" onclick="toggleNav()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          Badge text
+        </div>
+        <h1>Main <span class="accent">claim here.</span></h1>
+        <p class="hero-sub">
+          Sub-headline expanding the claim. 1-2 sentences maximum.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#cta">Primary CTA</a>
+          <a class="btn btn-ghost" href="#how">Secondary CTA</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="section section-alt" id="problem">
+      <div class="wrap">
+        <div class="section-header">
+          <div class="section-label">Problem</div>
+          <h2 class="section-title">Section headline</h2>
+          <p class="section-desc">Section description.</p>
+        </div>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon">Icon</div>
+            <h3>Card title</h3>
+            <p>Card description.</p>
+          </div>
+          <!-- Repeat cards -->
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section" id="how">
+      <div class="wrap">
+        <div class="section-header center">
+          <div class="section-label">Process</div>
+          <h2 class="section-title">How it works</h2>
+          <p class="section-desc">Section description.</p>
+        </div>
+        <div class="step-grid">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <h3>Step title</h3>
+            <p>Step description.</p>
+          </div>
+          <!-- Repeat steps -->
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section class="section section-alt" id="results">
+      <div class="wrap">
+        <div class="section-header center">
+          <div class="section-label">Results</div>
+          <h2 class="section-title">What changes</h2>
+          <p class="section-desc">Section description.</p>
+        </div>
+        <div class="metric-grid">
+          <div class="metric-card">
+            <div class="metric-num">N%</div>
+            <h4>Metric label</h4>
+            <p>Metric context.</p>
+          </div>
+          <!-- Repeat metrics -->
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" id="cta">
+      <div class="wrap">
+        <div class="cta-box">
+          <h2>Final CTA headline</h2>
+          <p>Reinforcement text. Short, compelling.</p>
+          <a class="btn btn-primary" href="#cta">Primary CTA</a>
+          <div class="cta-contacts">
+            <p>Or reach out: <a href="#">email</a> · <a href="#">Telegram</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">© 2026 Brand. Description.</div>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+    document.querySelectorAll('.nav-links a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        document.getElementById('navLinks').classList.remove('open');
+      });
+    });
+  </script>
+
+</body>
+</html>

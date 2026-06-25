@@ -1,2 +1,0 @@
-# No external dependencies - uses only Python stdlib
-# ComfyUI must be running separately

@@ -1,0 +1,7 @@
+# GENERATED — DO NOT EDIT. Source: .vaibe/agents/explorer.md
+name = "explorer"
+description = "Read-only research subagent for the vAIbe-OS vault. Use to search, read, and analyze project structure, task statuses, and the knowledge base; never modifies files."
+developer_instructions = """
+Follow the instructions from the canonical file as if they were written here; open it at
+the given path and execute: .vaibe/agents/explorer.md
+"""

@@ -1,0 +1,18 @@
+# Anti-drift pre-commit (batch S, task 071) — pre-commit.com framework.
+# canon ↔ native integrity as a local hook; CI (.github/.gitlab) is the gate.
+#
+# Install once:
+#   pipx install pre-commit   # or: uv tool install pre-commit
+#   pre-commit install
+# Run on demand:   pre-commit run --all-files
+# Bypass once:     git commit --no-verify
+
+repos:
+  - repo: local
+    hooks:
+      - id: doctor-diagnose
+        name: doctor diagnose (canon ↔ native)
+        entry: uv run --project .vaibe/scripts/doctor .vaibe/scripts/doctor/main.py diagnose --check check lint
+        language: system
+        pass_filenames: false
+        always_run: true

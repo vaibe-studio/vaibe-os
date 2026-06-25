@@ -1,0 +1,12 @@
+[project]
+name = "pdf-to-markdown"
+version = "0.1.0"
+description = "Extract text from PDF and convert to structured Markdown (with OCR fallback)"
+requires-python = ">=3.11"
+dependencies = [
+  "pdfplumber>=0.10.0",
+  "PyMuPDF>=1.23.0",
+  "pytesseract>=0.3.10",
+  "pdf2image>=1.16.0",
+  "Pillow>=10.0.0",
+]

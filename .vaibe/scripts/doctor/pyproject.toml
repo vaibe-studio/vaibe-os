@@ -1,0 +1,7 @@
+[project]
+name = "doctor"
+version = "0.1.0"
+description = "Canon ↔ native integrity for vAIbe-OS (model A): diagnose + treat"
+requires-python = ">=3.11"
+# Standard library only — invariants are checked without third-party deps.
+dependencies = []

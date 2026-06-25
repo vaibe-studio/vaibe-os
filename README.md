@@ -28,14 +28,14 @@ Think of it as **Obsidian for AI agents**: everything is plain Markdown files in
 | 🗂️ **Structure** | Projects, tasks, meetings, knowledge base — your AI knows where everything is from day one |
 | 🧠 **Memory** | Everything lives in files. Context doesn't disappear when you close the chat |
 | 🌱 **Evolution** | The system improves itself via `/evolve`, adapting to how *you* work |
-| 🎯 **Skills** | 14 core skills for task management, planning, reporting, and more — ready to use |
-| 📚 **Knowledge base** | 15+ curated reference materials — project management, strategy frameworks, sales methodologies, startup finance, and more. Your AI has domain expertise from the start |
+| 🎯 **Skills** | 47 skills for task management, planning, research, design, sales, and strategy — ready to use |
+| 📚 **Domain knowledge** | Curated reference skills — project management, strategy frameworks, sales methodologies, startup finance, and more. Your AI has domain expertise from the start |
 
 ## 🚀 Quickstart
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/vaibe-os/vaibe-os.git
+git clone https://github.com/vaibe-studio/vaibe-os.git
 cd vaibe-os
 
 # 2. Run the installer
@@ -59,25 +59,32 @@ Once you're set up, just talk to your AI agent naturally:
 
 ## 🏗️ How It Works
 
-vAIbe-OS is a set of Markdown files that any AI IDE can read and follow:
+vAIbe-OS is built on **one canon, many native wrappers**. You write everything once in `.vaibe/`; per-IDE wrappers are generated from it and committed alongside (the `GENERATED` marker means *don't edit by hand*).
 
 ```
 vAIbe-OS/
-├── 📋 AGENTS.md              → AI reads this first (judgment boundaries)
-├── 🧠 .ai/                   → The brain: skills, knowledge, philosophy
-│   ├── router.md             → Routes your request to the right skill
-│   ├── skills/core/          → 14 core skills (task mgmt, planning, evolve...)
-│   ├── skills/domain/        → 12 domain skills (presentations, research...)
-│   ├── knowledge/            → 15+ reference materials (strategy, PM, sales...)
-│   ├── ONTOLOGY.md           → Why the system exists (philosophical foundation)
-│   └── MANIFESTO.md          → How the system behaves (principles)
-├── 📁 Проекты/               → Your projects (tasks, meetings, docs)
-├── 📚 База знаний/           → Your personal knowledge base
-├── 📥 Инбокс/                → Drop files here for processing
-└── 🔧 tools/                 → Python utilities (installer, vault-lint)
+├── 📋 AGENTS.md                              → AI reads this first (rule spine + judgment boundaries)
+├── 🧠 .vaibe/                                → The canon — the single source of truth
+│   ├── rules/                                → 15 always-on rules (structure, git, behavior, guards…)
+│   ├── skills/                               → 47 skills (task mgmt, planning, research, evolve…)
+│   ├── agents/                               → Specialized subagents (architect, explorer, reviewer)
+│   └── scripts/                              → Python tools as self-contained uv projects (doctor, pdf…)
+├── 🤖 .claude/ .cursor/ .codex/ .opencode/   → Generated native wrappers (GENERATED — don't edit)
+├── 🩺 CLAUDE.md                              → Generated IDE shim → AGENTS.md
+├── 📁 Проекты/                               → Your projects (tasks, meetings, docs)
+├── 📚 База знаний/                           → Your personal knowledge base
+└── 📥 Инбокс/                                → Drop files here for processing
 ```
 
-> **Cross-IDE compatible**: works with Cursor, Claude Code, OpenCode, and any IDE that reads [AGENTS.md](https://agents.md/).
+Change the canon, then regenerate and verify the native layer with the built-in **doctor**:
+
+```bash
+D=.vaibe/scripts/doctor
+uv run --project $D $D/main.py treat       # regenerate native wrappers from the canon
+uv run --project $D $D/main.py diagnose    # check canon ↔ native integrity (CI gate)
+```
+
+> **Cross-IDE compatible**: works with Cursor, Claude Code, Codex, OpenCode, and any IDE that reads [AGENTS.md](https://agents.md/).
 
 ## 🎯 Core Commands
 
@@ -92,7 +99,7 @@ vAIbe-OS/
 | `/weekly-review` | Weekly progress, blockers, and priorities |
 | `/evolve` | System learns from your session and improves itself |
 
-All commands are Markdown playbooks in `.ai/skills/` — readable, editable, extensible.
+All skills are Markdown playbooks in `.vaibe/skills/` — readable, editable, extensible. The agent discovers them automatically by their `description`; there is no registry to maintain.
 
 ## 💚 Philosophy
 
@@ -104,16 +111,17 @@ Three principles that make it different:
 - 🛡️ **Autonomy** — if you remove vAIbe-OS tomorrow, you should be *more* competent than before you started using it
 - 🌱 **Evolution** — the system grows with you through `/evolve`, getting better at *your* way of working
 
-> Curious about the deeper foundations? See our [Ontology](.ai/ONTOLOGY.md) (5 laws of system evolution) and [Manifesto](.ai/MANIFESTO.md) (9 behavioral principles).
+> Curious about the deeper foundations? See the [Ontology](.vaibe/rules/ontology.md) (5 laws of system evolution) and the [Manifesto](.vaibe/rules/manifesto.md) (behavioral principles).
 
 ## 🖥️ Supported AI IDEs
 
 | IDE | How it connects | Status |
 |---|---|---|
-| **Cursor** | `.cursor/commands/` + `.cursor/rules/` | ✅ Full support |
-| **Claude Code** | `CLAUDE.md` + `.ai/` | ✅ Supported |
-| **OpenCode** | `AGENTS.md` + `.ai/` | ✅ Supported |
-| **Any other** | `AGENTS.md` + `.ai/` | 🟡 Basic support |
+| **Cursor** | `.cursor/` (generated) | ✅ Full support |
+| **Claude Code** | `CLAUDE.md` + `.claude/` (generated) | ✅ Supported |
+| **Codex** | `.codex/` (generated) | ✅ Supported |
+| **OpenCode** | `AGENTS.md` + `.opencode/` (generated) | ✅ Supported |
+| **Any other** | `AGENTS.md` + `.vaibe/` | 🟡 Basic support |
 
 > 💎 **Tip on model choice.** vAIbe-OS works with any LLM, but we recommend leading models (Claude Opus/Sonnet, GPT-4o, Gemini Pro) — skill quality, planning, and `/evolve` are noticeably better on top-tier models. If you have the choice, go with the best.
 
@@ -152,11 +160,12 @@ If you use it commercially and it helps your business generate revenue, we'd be 
 We'd love your help! Here's how to get started:
 
 **Add a new skill:**
-1. Create `.ai/skills/domain/your-skill.md` with YAML frontmatter
+1. Create `.vaibe/skills/your-skill/SKILL.md` with YAML frontmatter (`name`, `description`)
 2. Include: Purpose, Procedure, Output format, Quality bar
-3. The router discovers it automatically — no registration needed
+3. Regenerate the native wrappers: `uv run --project .vaibe/scripts/doctor .vaibe/scripts/doctor/main.py treat`
+4. The agent discovers it automatically by its `description` — no registration needed
 
-**Improve existing skills:** Every skill is a Markdown file. Read it, improve it, submit a PR.
+**Improve existing skills:** Every skill is a Markdown file in `.vaibe/skills/`. Read it, improve it, regenerate, submit a PR.
 
 **Report issues:** Found a bug or have an idea? [Open an issue](../../issues).
 

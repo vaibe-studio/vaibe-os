@@ -1,0 +1,18 @@
+[project]
+name = "meeting-transcriber"
+version = "0.1.0"
+description = "Transcribe meeting recordings with speaker diarization (AssemblyAI cloud or local Whisper+pyannote)"
+requires-python = ">=3.11"
+dependencies = [
+  "python-dotenv>=1.0.0",
+  "requests>=2.28.0",
+]
+
+[project.optional-dependencies]
+# Local backend (Whisper + pyannote.audio). Multi-GB; install only with `--extra local`.
+local = [
+  "openai-whisper",
+  "pyannote.audio",
+  "torch",
+  "torchaudio",
+]

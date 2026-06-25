@@ -1,0 +1,8 @@
+[project]
+name = "markdown-to-pdf"
+version = "0.1.0"
+description = "Convert Markdown to PDF"
+requires-python = ">=3.11"
+dependencies = [
+  "fpdf2>=2.8.5",
+]

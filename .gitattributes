@@ -1,0 +1,34 @@
+# Стандартизация line endings для кросс-платформенной работы (Windows + Linux)
+# Все текстовые файлы хранятся с LF в репозитории
+* text=auto eol=lf
+
+# Markdown
+*.md text eol=lf
+
+# Конфигурация
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.toml text eol=lf
+
+# Shell-скрипты
+*.sh text eol=lf
+
+# Python
+*.py text eol=lf
+
+# Бинарные файлы — не конвертировать
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.gz binary
+*.tar binary
+*.mp4 binary
+*.mp3 binary
+*.webm binary
+*.wav binary
+*.drawio binary

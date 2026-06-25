@@ -1,0 +1,14 @@
+[project]
+name = "png-to-svg"
+version = "0.1.0"
+description = "Pixel-accurate raster→SVG converter (embed / trace / mono modes)"
+requires-python = ">=3.11"
+# `embed` mode needs nothing; `mono` mode shells out to inkscape (system tool).
+dependencies = []
+
+[project.optional-dependencies]
+# `trace` mode (full-color vector trace) and JPG handling.
+trace = [
+  "vtracer",
+  "Pillow",
+]

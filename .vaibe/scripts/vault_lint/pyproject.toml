@@ -1,0 +1,6 @@
+[project]
+name = "vault-lint"
+version = "0.1.0"
+description = "Lightweight structural lint for the vAIbe-OS vault"
+requires-python = ">=3.11"
+dependencies = []

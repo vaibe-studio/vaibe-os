@@ -1,0 +1,10 @@
+[project]
+name = "dechecker"
+version = "0.1.0"
+description = "Remove baked-in checker background from Nano-Banana icon PNGs"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy",
+  "scipy",
+  "Pillow",
+]

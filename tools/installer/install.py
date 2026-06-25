@@ -17,11 +17,12 @@ REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 AGENTS = [
     ("cursor", "Cursor"),
     ("claude", "Claude Code"),
+    ("codex", "Codex"),
     ("opencode", "OpenCode"),
     ("other", "Other (AGENTS.md only)"),
 ]
 
-USER_DIRS = ["Проекты", "База знаний", "Инбокс"]
+USER_DIRS = ["Проекты", "База знаний", "Инбокс", "Контакты"]
 
 BANNER = r"""
 ╔══════════════════════════════════════╗
@@ -30,10 +31,11 @@ BANNER = r"""
 """
 
 AGENT_DESCRIPTIONS = {
-    "cursor": "Full support: slash commands, rules, meta-mind",
-    "claude": "Supported via CLAUDE.md + .ai/ skills",
-    "opencode": "Supported via AGENTS.md + .ai/ skills",
-    "other": "Basic support: AGENTS.md + .ai/ skills",
+    "cursor": "Full support: generated .cursor/ skills, rules, agents",
+    "claude": "Supported via CLAUDE.md + generated .claude/ skills",
+    "codex": "Supported via generated .codex/ skills + AGENTS.md",
+    "opencode": "Supported via AGENTS.md + generated .opencode/ skills",
+    "other": "Basic support: AGENTS.md + .vaibe/ canon",
 }
 
 
@@ -52,17 +54,18 @@ def select_agent() -> tuple:
         print(f"    {i}. {label}")
         print(f"       {desc}\n")
 
+    n = len(AGENTS)
     while True:
         try:
-            choice = input("  Enter number (1-4): ").strip()
+            choice = input(f"  Enter number (1-{n}): ").strip()
             idx = int(choice) - 1
-            if 0 <= idx < len(AGENTS):
+            if 0 <= idx < n:
                 key, label = AGENTS[idx]
                 print(f"\n  → Selected: {label}\n")
                 return key, label
         except (ValueError, EOFError):
             pass
-        print("  Invalid choice. Please enter 1-4.")
+        print(f"  Invalid choice. Please enter 1-{n}.")
 
 
 def get_user_info() -> tuple:
@@ -116,26 +119,29 @@ def verify_agent_config(agent_key: str):
 
     checks = {
         "cursor": [
-            (".cursor/commands", "Cursor commands"),
-            (".cursor/rules", "Cursor rules"),
-            (".ai/router.md", "Skills router"),
-            (".ai/bots.md", "Bot specification"),
-            ("AGENTS.md", "AGENTS.md"),
+            ("AGENTS.md", "AGENTS.md (rule spine)"),
+            (".vaibe/skills", "Canon skills"),
+            (".cursor/skills", "Cursor skills (generated)"),
+            (".cursor/agents", "Cursor agents (generated)"),
         ],
         "claude": [
-            ("CLAUDE.md", "CLAUDE.md"),
-            (".ai/router.md", "Skills router"),
-            (".ai/bots.md", "Bot specification"),
+            ("CLAUDE.md", "CLAUDE.md (generated shim)"),
+            (".vaibe/skills", "Canon skills"),
+            (".claude/skills", "Claude skills (generated)"),
+        ],
+        "codex": [
+            ("AGENTS.md", "AGENTS.md (rule spine)"),
+            (".vaibe/skills", "Canon skills"),
+            (".codex/skills", "Codex skills (generated)"),
         ],
         "opencode": [
-            ("AGENTS.md", "AGENTS.md"),
-            (".ai/router.md", "Skills router"),
-            (".ai/bots.md", "Bot specification"),
+            ("AGENTS.md", "AGENTS.md (rule spine)"),
+            (".vaibe/skills", "Canon skills"),
+            (".opencode/skills", "OpenCode skills (generated)"),
         ],
         "other": [
-            ("AGENTS.md", "AGENTS.md"),
-            (".ai/router.md", "Skills router"),
-            (".ai/bots.md", "Bot specification"),
+            ("AGENTS.md", "AGENTS.md (rule spine)"),
+            (".vaibe/skills", "Canon skills"),
         ],
     }
 
@@ -163,21 +169,26 @@ def print_next_steps(agent_key: str, agent_label: str):
         print("    2. Run: claude")
         print('    3. Ask: "Create a task for my project"')
         print('    4. Drop a file into Инбокс/ and ask: "Process my inbox"')
+    elif agent_key == "codex":
+        print("    1. Open this folder in your terminal")
+        print("    2. Run: codex")
+        print('    3. Ask: "Create a task for my project"')
+        print('    4. Drop a file into Инбокс/ and ask: "Process my inbox"')
     elif agent_key == "opencode":
         print("    1. Open this folder in your terminal")
         print("    2. Run: opencode")
-        print("    3. Ask the agent to read .ai/router.md for available skills")
+        print('    3. Ask: "Create a task for my project"')
     else:
         print("    1. Open this folder in your AI IDE")
         print("    2. Point your agent to AGENTS.md")
-        print("    3. Ask it to read .ai/router.md for available skills")
+        print("    3. Skills are auto-discovered from .vaibe/skills/ by description")
 
     print()
     print("  Key files:")
     print("    README.md          — documentation")
-    print("    .ai/router.md      — skill routing")
-    print("    .ai/bots.md        — bot ecosystem")
-    print("    .ai/bots/          — installed bots (12 bundled)")
+    print("    AGENTS.md          — the rule spine your agent reads first")
+    print("    .vaibe/skills/     — 47 skills (auto-discovered by description)")
+    print("    .vaibe/rules/      — always-on rules (structure, git, behavior, guards)")
     print()
 
 

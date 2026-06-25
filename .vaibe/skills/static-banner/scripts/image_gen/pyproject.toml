@@ -1,0 +1,7 @@
+[project]
+name = "image-gen"
+version = "0.1.0"
+description = "Generate images via a running ComfyUI API using vAIbe-media character sheets"
+requires-python = ">=3.11"
+# Standard library only (HTTP via urllib); ComfyUI runs as a separate service.
+dependencies = []

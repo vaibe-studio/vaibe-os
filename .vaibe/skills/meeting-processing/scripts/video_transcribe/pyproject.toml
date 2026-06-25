@@ -1,0 +1,10 @@
+[project]
+name = "video-transcribe"
+version = "0.1.0"
+description = "Transcribe videos from the Inbox via AssemblyAI"
+requires-python = ">=3.11"
+dependencies = [
+  "assemblyai>=0.37.0",
+  "moviepy>=2.0.0",
+  "python-dotenv>=1.0.0",
+]

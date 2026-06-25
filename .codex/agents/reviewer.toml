@@ -1,0 +1,7 @@
+# GENERATED — DO NOT EDIT. Source: .vaibe/agents/reviewer.md
+name = "reviewer"
+description = "Review subagent for vAIbe-OS content. Use to check task.md, skills, and rules for format compliance and cross-reference integrity; read-only, reports findings by path and line."
+developer_instructions = """
+Follow the instructions from the canonical file as if they were written here; open it at
+the given path and execute: .vaibe/agents/reviewer.md
+"""
