@@ -40,6 +40,15 @@ AGENT_DESCRIPTIONS = {
 }
 
 
+def skill_count() -> int:
+    """Count canon skills (directories with a SKILL.md) — kept dynamic so the
+    same installer is correct in any vault regardless of how many skills ship."""
+    skills_dir = REPO_ROOT / ".vaibe" / "skills"
+    if not skills_dir.is_dir():
+        return 0
+    return sum(1 for p in skills_dir.iterdir() if (p / "SKILL.md").is_file())
+
+
 def clear_screen():
     os.system("cls" if os.name == "nt" else "clear")
 
@@ -188,7 +197,7 @@ def print_next_steps(agent_key: str, agent_label: str):
     print("  Key files:")
     print("    README.md          — documentation")
     print("    AGENTS.md          — the rule spine your agent reads first")
-    print("    .vaibe/skills/     — 47 skills (auto-discovered by description)")
+    print(f"    .vaibe/skills/     — {skill_count()} skills (auto-discovered by description)")
     print("    .vaibe/rules/      — always-on rules (structure, git, behavior, guards)")
     print()
 

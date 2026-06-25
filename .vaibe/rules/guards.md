@@ -219,8 +219,7 @@ uv run --project .vaibe/scripts/doctor .vaibe/scripts/doctor/main.py diagnose
 ```
 Invariants G1–G6, G10–G12 are implemented as machine-checkable checks in
 `.vaibe/scripts/doctor/diagnose.py`. G7 is a process guard (before deletion), G8/G9 are
-heuristics (advisory). The `.vaibe/scripts/vault_lint/` prototype (legacy `.ai/` paths) is
-superseded; its removal is up to the owner.
+heuristics (advisory).
 
 ### Manual check
 At `/evolve`, `/task-create`, `/task-execute` — the agent checks against Guards before writing files.

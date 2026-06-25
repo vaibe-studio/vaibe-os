@@ -48,8 +48,7 @@ writes nothing. Orphans (native files with no canon source) are reported, not
 deleted. A new `.vaibe/rules/X.md` with no `AGENTS.md` section prints a
 prompt-hint (a section skeleton to paste by hand), never edits `AGENTS.md`.
 
-`.vaibe/rules/guards.md` stays the human spec; `diagnose` is its executable form, and
-supersedes the `.vaibe/scripts/vault_lint/` prototype (legacy `.ai/` paths).
+`.vaibe/rules/guards.md` stays the human spec; `diagnose` is its executable form.
 Project/task/status reporting is the `tasks-report` skill (on demand); there is
 no static index. Skills are discovered at runtime from `description` frontmatter.
 

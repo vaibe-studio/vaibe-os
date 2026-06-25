@@ -101,7 +101,7 @@ Read the selected template file.
 
 ### 4e. Integrity pre-flight (G4 — uniqueness of task numbers)
 - Before generating the plan, verify task-number uniqueness within the project (invariant **G4**): scan `Задачи/*/` dir names and confirm no two tasks share the same `{NUM}`.
-- Fast check: `ls -1 Проекты/{PROJECT}/Задачи | sed -E 's/^([0-9]+)-.*/\1/' | sort | uniq -d` — any output = duplicate numbers; or rely on `uv run --project .vaibe/scripts/vault_lint .vaibe/scripts/vault_lint/main.py` (reports `[G4]` lines).
+- Fast check: `ls -1 Проекты/{PROJECT}/Задачи | sed -E 's/^([0-9]+)-.*/\1/' | sort | uniq -d` — any output = duplicate numbers; or rely on `uv run --project .vaibe/scripts/doctor .vaibe/scripts/doctor/main.py diagnose` (reports `[G4]` findings).
 - If duplicates found → surface them in the plan as **⚠️ requires check** (blockers/reminders section) with both conflicting task titles, and propose a renumber fix. Do **not** silently pick one. Empirically (batch run 01.06.2026) ~30% of active projects carried a G4 duplicate that had gone unnoticed — the check pays for itself.
 
 ## Step 5 — Classify and prioritize
