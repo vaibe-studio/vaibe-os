@@ -5,6 +5,20 @@ All notable changes to vAIbe-OS are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.2-alpha] - 2026-07-01
+
+> Pre-release. Structure and APIs may still change before 0.1.0.
+
+### Changed
+
+- **`os-skill-base` description** — rewritten to state that the skill is a
+  mandatory prerequisite to load FIRST when authoring, reviewing, or changing a
+  skill, and that "reference" names its content type, not its priority (it is not
+  optional). Fixes a discovery gap where the skill was treated as skippable
+  background and work proceeded by pattern-completing from another skill as a
+  template. The imperative lives in `description` on purpose: only `name` +
+  `description` load at startup, so that is where the decision to load is made.
+
 ## [0.1.1-alpha] - 2026-07-01
 
 > Pre-release. Structure and APIs may still change before 0.1.0.
