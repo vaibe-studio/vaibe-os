@@ -28,7 +28,7 @@ Think of it as **Obsidian for AI agents**: everything is plain Markdown files in
 | 🗂️ **Structure** | Projects, tasks, meetings, knowledge base — your AI knows where everything is from day one |
 | 🧠 **Memory** | Everything lives in files. Context doesn't disappear when you close the chat |
 | 🌱 **Evolution** | The system improves itself via `/evolve`, adapting to how *you* work |
-| 🎯 **Skills** | 47 skills for task management, planning, research, design, sales, and strategy — ready to use |
+| 🎯 **Skills** | 48 skills for task management, planning, research, design, sales, and strategy — ready to use |
 | 📚 **Domain knowledge** | Curated reference skills — project management, strategy frameworks, sales methodologies, startup finance, and more. Your AI has domain expertise from the start |
 
 ## 🚀 Quickstart
@@ -66,7 +66,7 @@ vAIbe-OS/
 ├── 📋 AGENTS.md                              → AI reads this first (rule spine + judgment boundaries)
 ├── 🧠 .vaibe/                                → The canon — the single source of truth
 │   ├── rules/                                → 15 always-on rules (structure, git, behavior, guards…)
-│   ├── skills/                               → 47 skills (task mgmt, planning, research, evolve…)
+│   ├── skills/                               → 48 skills (task mgmt, planning, research, evolve…)
 │   ├── agents/                               → Specialized subagents (architect, explorer, reviewer)
 │   └── scripts/                              → Python tools as self-contained uv projects (doctor, pdf…)
 ├── 🤖 .claude/ .cursor/ .codex/ .opencode/   → Generated native wrappers (GENERATED — don't edit)

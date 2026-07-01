@@ -5,6 +5,19 @@ All notable changes to vAIbe-OS are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1-alpha] - 2026-07-01
+
+> Pre-release. Structure and APIs may still change before 0.1.0.
+
+### Added
+
+- **`os-skill-base` skill** — a sourced reference on how agent skills are
+  composed: the cross-tool open standard (agentskills.io) and the deltas for
+  Cursor, Claude Code, OpenCode, and Codex, Anthropic authoring best practices,
+  and how it all maps onto the vAIbe-OS canon (model A). Reference knowledge to
+  load before authoring, reviewing, or changing any skill. Brings the skills
+  library to 48.
+
 ## [0.1.0-alpha] - 2026-06-25
 
 First alpha of vAIbe-OS as a canon-driven system. This release replaces the
@@ -59,4 +72,5 @@ keeps the generated layer in sync with the canon.
 - `doctor`: Windows UTF-8 subprocess handling and POSIX orphan-path resolution.
 - `doctor`: submodule validation logic in diagnostics.
 
+[0.1.1-alpha]: https://github.com/vaibe-studio/vaibe-os/compare/v0.1.0-alpha...v0.1.1-alpha
 [0.1.0-alpha]: https://github.com/vaibe-studio/vaibe-os/compare/v0.0.1...v0.1.0-alpha
