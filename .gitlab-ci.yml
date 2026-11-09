@@ -1,0 +1,55 @@
+# vAIbe-OS core CI — binaries are built by tags (vX.Y.Z) and published to the GitHub release.
+stages: [build, publish]
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/
+
+variables:
+  GITHUB_REPO: vaibe-studio/vaibe-os
+
+build:
+  stage: build
+  image: golang:1.24
+  parallel:
+    matrix:
+      - GOOS: linux
+        GOARCH: amd64
+      - GOOS: linux
+        GOARCH: arm64
+      - GOOS: darwin
+        GOARCH: amd64
+      - GOOS: darwin
+        GOARCH: arm64
+      - GOOS: windows
+        GOARCH: amd64
+  before_script:
+    - if [ "$GOOS" = "windows" ]; then apt-get update -qq && apt-get install -y -qq zip; fi
+  script:
+    - go build -trimpath -ldflags "-s -w" -o vaibe-os ./cmd/vaibe-os
+    - mkdir release
+    - if [ "$GOOS" = "windows" ];
+      then zip -q "release/vaibe-os_${CI_COMMIT_TAG}_${GOOS}_${GOARCH}.zip" vaibe-os.exe;
+      else tar -czf "release/vaibe-os_${CI_COMMIT_TAG}_${GOOS}_${GOARCH}.tar.gz" vaibe-os;
+      fi
+  artifacts:
+    paths:
+      - release/
+
+publish-github:
+  stage: publish
+  image: curlimages/curl:latest
+  needs: [build]
+  script:
+    - AUTH="Authorization: Bearer $GITHUB_TOKEN"
+    - BODY="{\"tag_name\":\"$CI_COMMIT_TAG\",\"name\":\"$CI_COMMIT_TAG\",\"body\":\"Built by GitLab CI from tag $CI_COMMIT_TAG\"}"
+    - RESP=$(curl -sf -X POST -H "$AUTH" -H "Accept: application/vnd.github+json" -d "$BODY" "https://api.github.com/repos/$GITHUB_REPO/releases")
+    - RELEASE_ID=$(echo "$RESP" | grep -o '"id":[0-9]*' | head -n1 | grep -o '[0-9]*')
+    - test -n "$RELEASE_ID" || { echo "failed to create GitHub release"; exit 1; }
+    - for f in release/*;
+      do curl -sf -X POST -H "$AUTH" -H "Content-Type: application/octet-stream"
+           --data-binary "@$f"
+           "https://uploads.github.com/repos/$GITHUB_REPO/releases/$RELEASE_ID/assets?name=$(basename "$f")" >/dev/null
+           || exit 1;
+      done
+    - echo "GitHub release published: $CI_COMMIT_TAG"
