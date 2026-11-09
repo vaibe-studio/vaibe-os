@@ -1,0 +1,5 @@
+# {{PROJECT_NAME}}
+
+> {{PROJECT_DESCRIPTION}}
+
+- id: PROJ-{{SLUG}}

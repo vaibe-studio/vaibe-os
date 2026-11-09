@@ -1,0 +1,9 @@
+# Instance configuration — owned and validated by vaibe-os.
+instance:
+  name: {{INSTANCE_NAME}}
+core:
+  repo: github.com/vaibe-studio/vaibe-os
+  tag: v0.1.0                     # pinned by vaibe-os init / update
+links: []                         # declared via `vaibe-os connect <instance>`
+hooks: {}                         # session-start hooks
+plugins: {}                       # connectors: enabled + options
