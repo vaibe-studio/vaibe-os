@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-//go:embed all:skeleton
+//go:embed all:skeleton skeleton/.gitattributes skeleton/.gitignore skeleton/.env.example
 var skeletonFS embed.FS
 
 const version = "v0.1.0-alpha"
@@ -77,6 +77,9 @@ func runInit(args []string) error {
 		}
 	}
 
+	if err := os.MkdirAll(folder, 0o755); err != nil {
+		return err
+	}
 	if err := fs.WalkDir(skeletonFS, "skeleton", func(p string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
